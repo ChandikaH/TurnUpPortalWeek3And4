@@ -14,6 +14,7 @@ namespace TurnUpPortalWeek3And4.Utilities
         public static void WaitToBeClickable(IWebDriver driver, string locatorType, string locatorValue, int seconds)
         {
             var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
+
             if (locatorType == "XPath")
             {
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(locatorValue)));
@@ -22,7 +23,6 @@ namespace TurnUpPortalWeek3And4.Utilities
             {
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(locatorValue)));
             }
-
         }
 
         public static void WaitToBeVisible(IWebDriver driver, string locatorType, string locatorValue, int seconds)
