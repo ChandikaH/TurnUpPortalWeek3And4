@@ -28,7 +28,7 @@ namespace TurnUpPortalWeek3And4.Tests
             homePageObj.NavigateToTMPage(driver);
         }
 
-        [Test]
+        [Test, Order(1), Description("This test will verify Time material Record creation")]
         public void CreateTime_Test()
         {
             // TM page object initialization and definition
@@ -36,7 +36,7 @@ namespace TurnUpPortalWeek3And4.Tests
             tMPageObj.CreateTimeRecord(driver);
         }
 
-        [Test]
+        [Test, Order(2), Description("This test will verify Time material Record update")]
         public void EditTime_Test()
         {
             // Edit Time Record
@@ -44,7 +44,7 @@ namespace TurnUpPortalWeek3And4.Tests
             tMPageObj.EditTimeRecord(driver);
         }
 
-        [Test]
+        [Test, Order(3), Description("This test will verify Time material Record delete")]
         public void DeleteTime_Test()
         {
             // Delete Time Record

@@ -14,9 +14,18 @@ namespace TurnUpPortalWeek3And4.Pages
     {
         public void CreateTimeRecord(IWebDriver driver)
         {
-            // Click on Create New Button
-            IWebElement createNewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
-            createNewButton.Click();
+            try
+            {
+                // Click on Create New Button
+                IWebElement createNewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a/incorrect"));
+                createNewButton.Click();
+            }
+            catch (NoSuchElementException ex) 
+            {
+                Console.WriteLine("THIS TEST IS GOING TO FAIL");
+                Console.WriteLine(ex.Message);
+                Assert.Fail(ex.Message);
+            }
 
             // Select Time from dropdown
             IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[2]/span"));
