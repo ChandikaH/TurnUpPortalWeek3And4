@@ -16,15 +16,12 @@ namespace TurnUpPortalWeek3And4.Pages
         {
             try
             {
-                // Click on Create New Button
-                IWebElement createNewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a/incorrect"));
+                IWebElement createNewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
                 createNewButton.Click();
             }
-            catch (NoSuchElementException ex) 
+            catch (Exception ex)
             {
-                Console.WriteLine("THIS TEST IS GOING TO FAIL");
-                Console.WriteLine(ex.Message);
-                Assert.Fail(ex.Message);
+                Assert.Fail("Create New button hasn't been found.");
             }
 
             // Select Time from dropdown
@@ -59,21 +56,45 @@ namespace TurnUpPortalWeek3And4.Pages
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
             goToLastPageButton.Click();
 
-            IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-
-            Assert.That(newCode.Text == "TA Programme", "New time record has not been created!");
-
-            //if (newCode.Text == "TA Programme")
-            //{
-            //    Assert.Pass("Time record created successfully!");
-            //}
-            //else
-            //{
-            //    Assert.Fail("New time record has not been created!");
-            //}
         }
 
-        public void EditTimeRecord(IWebDriver driver)
+        public string GetElementText(IWebDriver driver, string columnName)
+        {
+            IWebElement webElement;
+            if (columnName.Equals("code"))
+            {
+                webElement = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            }
+            else if (columnName.Equals("description"))
+            {
+                webElement = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            }
+            else
+            {
+                webElement = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            }
+            return webElement.Text;
+        }
+
+        public string GetCode(IWebDriver driver)
+        {
+            IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            return newCode.Text;
+        }
+
+        public string GetDescription(IWebDriver driver)
+        {
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return newDescription.Text;
+        }
+
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return newPrice.Text;
+        }
+
+        public void EditTimeRecord(IWebDriver driver, string code, string description, string price)
         {
             Thread.Sleep(4000);
             //Select a record and click edit button
@@ -87,7 +108,8 @@ namespace TurnUpPortalWeek3And4.Pages
 
             IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
             codeTextbox.Clear();
-            codeTextbox.SendKeys("Edit TA Programme");
+            Thread.Sleep(2000);
+            codeTextbox.SendKeys(code);
 
 
             //Click save
@@ -98,20 +120,12 @@ namespace TurnUpPortalWeek3And4.Pages
             IWebElement llastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
             llastPageButton.Click();
             Thread.Sleep(1500);
+        }
 
+        public string GetEditedCode(IWebDriver driver)
+        {
             IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-
-
-            if (editedCode.Text == "Edit TA Programme")
-            {
-                Console.WriteLine("Time record edited successfuly!");
-            }
-            else
-            {
-                Console.WriteLine("New time record has not been edited!");
-            }
-
-            Thread.Sleep(1500);
+            return editedCode.Text;
         }
         public void DeleteTimeRecord(IWebDriver driver)
         {

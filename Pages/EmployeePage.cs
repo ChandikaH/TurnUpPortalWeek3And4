@@ -23,5 +23,23 @@ namespace TurnUpPortalWeek3And4.Pages
         {
             Console.WriteLine("Employee Record Deleted");
         }
+
+        public string GetElementText(IWebDriver driver, string columnName)
+        {
+            IWebElement webElement;
+            if (columnName.Equals(""))
+            {
+                webElement = driver.FindElement(By.XPath(""));
+            }
+            else if (columnName.Equals(""))
+            {
+                webElement = driver.FindElement(By.XPath(""));
+            }
+            else
+            {
+                webElement = driver.FindElement(By.XPath(""));
+            }
+            return webElement.Text;
+        }
     }
 }

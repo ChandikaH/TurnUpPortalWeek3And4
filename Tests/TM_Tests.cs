@@ -41,7 +41,7 @@ namespace TurnUpPortalWeek3And4.Tests
         {
             // Edit Time Record
             TMPage tMPageObj = new TMPage();
-            tMPageObj.EditTimeRecord(driver);
+            tMPageObj.EditTimeRecord(driver, "", "", "");
         }
 
         [Test, Order(3), Description("This test will verify Time material Record delete")]
