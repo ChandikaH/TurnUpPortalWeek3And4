@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TurnUpPortalWeek3And4.Utilities;
+using NUnit.Framework;
 
 namespace TurnUpPortalWeek3And4.Pages
 {
@@ -21,6 +22,25 @@ namespace TurnUpPortalWeek3And4.Pages
 
             IWebElement timeAndMaterialOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
             timeAndMaterialOption.Click();
+        }
+
+        public void NavigateToEmployeePage(IWebDriver driver)
+        {
+            try
+            {
+                //Navigate to Time and Material module (Click Administration button -> Select Employee Option)
+                IWebElement administrationTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a/span"));
+                administrationTab.Click();
+                WebDriverWait webDriverWait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//a[normalize-space()='Employees']")));
+
+                IWebElement employeeOption = driver.FindElement(By.XPath("//a[normalize-space()='Employees']"));
+                employeeOption.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("TurnUp portal page did not displayed" + ex.Message);
+            }
         }
     }
 }

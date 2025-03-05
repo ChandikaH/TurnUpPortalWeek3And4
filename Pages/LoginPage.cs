@@ -1,11 +1,5 @@
-﻿using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TurnUpPortalWeek3And4.Utilities;
+﻿using OpenQA.Selenium;
+using TAProgramme.Utilities;
 
 namespace TurnUpPortalWeek3And4.Pages
 {
@@ -28,7 +22,7 @@ namespace TurnUpPortalWeek3And4.Pages
             passwordTextbox.SendKeys("123123");
 
             // Identify login buton and click on it
-            IWebElement loginButton = driver.FindElement(By.XPath("//*[@id=\"loginForm\"]/form/div[3]/input[1]"));
+            IWebElement loginButton = WaitUtils.FluentWait(driver, By.XPath("//*[@id=\"loginForm\"]/form/div[3]/input[1]"), 10, 500);
             loginButton.Click();
             Thread.Sleep(2000);
         }
