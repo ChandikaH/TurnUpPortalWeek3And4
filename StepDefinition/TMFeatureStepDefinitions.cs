@@ -51,22 +51,41 @@ namespace TurnUpPortalWeek3And4.StepDefinition
             Assert.That(newPrice == "$12.00", "Actual Price and expected Price do not match.");
         }
 
-        [When("I update the {string} on an existing Time record")]
-        public void WhenIUpdateTheOnAnExistingTimeRecord(string code)
+        //[When("I update the {string} on an existing Time record")]
+        //public void WhenIUpdateTheOnAnExistingTimeRecord(string code)
+        //{
+        //    TMPage tMPageObj = new TMPage();
+        //    tMPageObj.EditTimeRecord(driver, code);
+        //}
+
+        //[Then("the record should have the updated {string}")]
+        //public void ThenTheRecordShouldHaveTheUpdated(string code)
+        //{
+        //    TMPage tMPageObj = new TMPage();
+
+        //    string editedCode = tMPageObj.GetEditedCode(driver);
+
+        //    Assert.That(editedCode == code, "Expected Edited Code does not match with the Actual Edited Code.");
+        //}
+
+        [When("I update the {string} and {string} on an existing Time record")]
+        public void WhenIUpdateTheAndOnAnExistingTimeRecord(string code, string description)
         {
             TMPage tMPageObj = new TMPage();
-            tMPageObj.EditTimeRecord(driver, code);
+            tMPageObj.EditTimeRecord(driver, code, description);
         }
 
-        [Then("the record should have the updated {string}")]
-        public void ThenTheRecordShouldHaveTheUpdated(string code)
+        [Then("the record should have the updated {string} and {string}")]
+        public void ThenTheRecordShouldHaveTheUpdatedAnd(string code, string description)
         {
             TMPage tMPageObj = new TMPage();
 
             string editedCode = tMPageObj.GetEditedCode(driver);
-
-            Assert.That(editedCode == code, "Expected Edited Code does not match with the Actual Edited Code.");
+            string editedDescription = tMPageObj.GetEditedDescription(driver);
+            Assert.That(editedCode == code, "Expected Edited Code and actual edited code do not match.");
+            Assert.That(editedDescription == description, "Expected Edited Description and actual edited description do not match.");
         }
+
 
     }
 }
