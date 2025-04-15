@@ -22,5 +22,10 @@ namespace TurnUpPortalWeek3And4.Pages
             IWebElement timeAndMaterialOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
             timeAndMaterialOption.Click();
         }
+
+        internal void NavigateToEmployeePage(IWebDriver driver)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
