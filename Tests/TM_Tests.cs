@@ -17,7 +17,9 @@ namespace TurnUpPortalWeek3And4.Tests
         public void SetUpSteps()
         {
             // Open Chrome Browser
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.AddUserProfilePreference("profile.password_manager_leak_detection", false);
+            driver = new ChromeDriver(options);
 
             // Login page object initialization and definition
             LoginPage loginPageObj = new LoginPage();

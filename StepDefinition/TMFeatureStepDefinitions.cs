@@ -10,12 +10,20 @@ namespace TurnUpPortalWeek3And4.StepDefinition
     [Binding]
     public class TMFeatureStepDefinitions : CommonDriver
     {
+
+
+        [BeforeScenario]
+        public void SetUpSteps()
+        {
+            // Open Chrome Browser
+            ChromeOptions options = new ChromeOptions();
+            options.AddUserProfilePreference("profile.password_manager_leak_detection", false);
+            driver = new ChromeDriver(options);
+        }
+
         [Given("I logged into TurnUp portal successfully")]
         public void GivenILoggedIntoTurnUpPortalSuccessfully()
         {
-            // Open Chrome Browser
-            driver = new ChromeDriver();
-
             // Login page object initialization and definition
             LoginPage loginPageObj = new LoginPage();
             loginPageObj.LoginActions(driver);
@@ -86,6 +94,12 @@ namespace TurnUpPortalWeek3And4.StepDefinition
             Assert.That(editedDescription == description, "Expected Edited Description and actual edited description do not match.");
         }
 
+
+        [AfterScenario]
+        public void CloseTestRun()
+        {
+            driver.Quit();
+        }
 
     }
 }
