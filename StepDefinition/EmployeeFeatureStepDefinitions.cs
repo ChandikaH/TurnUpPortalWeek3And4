@@ -15,10 +15,12 @@ namespace TurnUpPortalWeek3And4.StepDefinition
         EmployeePage employeePageObj = new EmployeePage();
 
         [BeforeScenario]
-        public void SetUpDriver()
+        public void SetUpSteps()
         {
             // Open Chrome Browser
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.AddUserProfilePreference("profile.password_manager_leak_detection", false);
+            driver = new ChromeDriver(options);
         }
 
         [Given("I logged into Turnup portal successfully")]
