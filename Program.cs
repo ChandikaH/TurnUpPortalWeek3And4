@@ -9,7 +9,9 @@ public class Program
         Console.WriteLine("Hello IndustryConnect!");
 
         // Open Chrome Browser
-        IWebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.AddUserProfilePreference("profile.password_manager_leak_detection", false);
+        IWebDriver driver = new ChromeDriver(options);
 
         // Login page object initialization and definition
         LoginPage loginPageObj = new LoginPage();
