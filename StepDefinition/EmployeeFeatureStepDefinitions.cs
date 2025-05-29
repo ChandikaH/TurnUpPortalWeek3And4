@@ -31,8 +31,8 @@ namespace TurnUpPortalWeek3And4.StepDefinition
             loginPageObj.LoginActions(driver);
         }
 
-        [When("I navigate to Employee Page")]
-        public void WhenINavigateToEmployeePage()
+        [Given("I navigate to Employee Page")]
+        public void GivenINavigateToEmployeePage()
         {
             HomePage homePageObj = new HomePage();
             homePageObj.NavigateToEmployeePage(driver);
@@ -40,7 +40,7 @@ namespace TurnUpPortalWeek3And4.StepDefinition
         }
 
         [When("I create a new Employee record")]
-        public void GivenICreateANewEmployeeRecord()
+        public void WhenICreateANewEmployeeRecord()
         {
             employeePageObj.CreateEmployeeRecord(driver);
             Console.WriteLine("Create - I create a new Time record");
@@ -51,6 +51,30 @@ namespace TurnUpPortalWeek3And4.StepDefinition
         {
             //Assert.That(employeePageObj.GetElementText(driver, "name") == "Employee 1", "Actual Name and expected Name do not match.");
             Console.WriteLine("Verify - the record should be created successfully");
+        }
+
+        [When("I update the Employee record")]
+        public void WhenIUpdateTheEmployeeRecord()
+        {
+            Console.WriteLine("Updating the employee record");
+        }
+
+        [When("I delete the Employee record")]
+        public void WhenIDeleteTheEmployeeRecord()
+        {
+            Console.WriteLine("Deleting the employee record");
+        }
+
+        [Then("the employee record should be updated successfully")]
+        public void ThenTheEmployeeRecordShouldBeUpdatedSuccessfully()
+        {
+            Console.WriteLine("Verify - the record should be updated successfully");
+        }
+
+        [Then("the employee record should be deleted successfully")]
+        public void ThenTheEmployeeRecordShouldBeDeletedSuccessfully()
+        {
+            Console.WriteLine("Verify - the record should be deleted successfully");
         }
 
         [AfterScenario]

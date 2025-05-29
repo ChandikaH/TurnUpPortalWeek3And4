@@ -4,20 +4,20 @@ As a Turnup portal admin user
 I would like to create, edit and delete time and material records
 So that I can manage the employee time and materials successfully
 
-@regression @bvt @timeandmaterial
-Scenario: Create new time and material record with valid data
+Background:
 	Given I logged into TurnUp portal successfully
 	And I navigate to the Time and Material page
+
+@regression @bvt @timeandmaterial
+Scenario: Create new time and material record with valid data
 	When I create a new time and material record
 	Then the record should be created successfully
 
 Scenario Outline: edit existing time record with valid data
-	Given I logged into TurnUp portal successfully
-	And I navigate to the Time and Material page
 	When I update the '<Code>' and '<Description>' on an existing Time record
 	Then the record should have the updated '<Code>' and '<Description>'
 
-	Examples: 
+Examples:
 	| Code             | Description |
 	| Industry Connect | Laptop      |
 	| TA Job Ready     | Mouse       |
