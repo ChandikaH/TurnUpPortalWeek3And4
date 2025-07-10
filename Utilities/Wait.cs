@@ -1,37 +1,27 @@
-﻿using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace TurnUpPortalWeek3And4.Utilities
 {
-    public class Wait
+    public static class WaitHelper
     {
-        // Generic function to wait for an element to be clickable
-        public static void WaitToBeClickable(IWebDriver driver, string locatorType, string locatorValue, int seconds)
+        public static IWebElement WaitForElementVisible(IWebDriver driver, By locator, int timeoutInSeconds = 10)
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
-
-            if (locatorType == "XPath")
-            {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(locatorValue)));
-            }
-            if (locatorType == "Id")
-            {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(locatorValue)));
-            }
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
         }
 
-        public static void WaitToBeVisible(IWebDriver driver, string locatorType, string locatorValue, int seconds)
+        public static IWebElement WaitForElementClickable(IWebDriver driver, By locator, int timeoutInSeconds = 10)
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
+        }
 
-            if (locatorType == "XPath")
-            {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath(locatorValue)));
-            }
-            if (locatorType == "Id")
-            {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id(locatorValue)));
-            }
+        public static bool WaitForElementInvisible(IWebDriver driver, By locator, int timeoutInSeconds = 10)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(locator));
         }
     }
 }
