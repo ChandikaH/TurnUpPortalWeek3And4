@@ -23,5 +23,16 @@ namespace TurnUpPortalWeek3And4.Utilities
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(locator));
         }
+
+        public static IWebElement WaitWithFluentWait(IWebDriver driver, By locator, int timeoutInSeconds = 10, int pollingMillis = 500)
+        {
+            var wait = new DefaultWait<IWebDriver>(driver)
+            {
+                Timeout = TimeSpan.FromSeconds(timeoutInSeconds),
+                PollingInterval = TimeSpan.FromMilliseconds(pollingMillis)
+            };
+            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            return wait.Until(drv => drv.FindElement(locator));
+        }
     }
 }
